@@ -7,13 +7,15 @@ import android.os.PowerManager;
 import android.os.PowerManager.WakeLock;
 import android.speech.tts.TextToSpeech.OnInitListener;
 
-public class BInstallerActivity  extends Activity implements OnInitListener {
+public class BInstallerActivity extends Activity implements OnInitListener {
 
     private BInstallerView mBInstallerView;
     private PowerManager mPowerManager;
     private WakeLock mWakeLock;
-    
-    /** Called when the activity is first created. */
+
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     @SuppressWarnings("deprecation")
     public void onCreate(Bundle savedInstanceState) {
@@ -27,7 +29,7 @@ public class BInstallerActivity  extends Activity implements OnInitListener {
                 .getName());
 
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-        
+
         // instantiate our simulation view and set it as the activity's content
         mBInstallerView = new BInstallerView(this);
         setContentView(mBInstallerView);
@@ -54,10 +56,8 @@ public class BInstallerActivity  extends Activity implements OnInitListener {
     }
 
     @Override
-    public void onInit(int i)
-    {
+    public void onInit(int i) {
     }
 
-    
 
 }

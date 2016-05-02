@@ -1,5 +1,7 @@
 package btools.routingapp;
 
+import android.content.Context;
+
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.InputStream;
@@ -7,45 +9,41 @@ import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 
-import android.content.Context;
-
 
 /**
  * Decsription of a service config
  */
-public class ConfigHelper
-{
-	 public static String getBaseDir( Context ctx )
-	 {
-            // get base dir from private file
-            InputStream configInput = null;
-            try
-            {
-              configInput = ctx.openFileInput( "config.dat" );
-              BufferedReader br = new BufferedReader( new InputStreamReader (configInput ) );
-              return br.readLine();
+public class ConfigHelper {
+    public static String getBaseDir(Context ctx) {
+        // get base dir from private file
+        InputStream configInput = null;
+        try {
+            configInput = ctx.openFileInput("config.dat");
+            BufferedReader br = new BufferedReader(new InputStreamReader(configInput));
+            return br.readLine();
+        } catch (Exception e) {
+            return null;
+        } finally {
+            if (configInput != null) try {
+                configInput.close();
+            } catch (Exception ee) {
             }
-            catch( Exception e ) { return null; }
-            finally
-            {
-              if ( configInput != null  ) try { configInput.close(); } catch( Exception ee ) {}
-            }
-	}
+        }
+    }
 
-	 public static void writeBaseDir( Context ctx, String baseDir )
-	 {
-                BufferedWriter bw = null;
-                try
-                {
-                    OutputStream configOutput =  ctx.openFileOutput( "config.dat", Context.MODE_PRIVATE );
-                  bw = new BufferedWriter( new OutputStreamWriter (configOutput ) );
-                  bw.write( baseDir );
-                  bw.write( '\n' );
-                }
-                catch( Exception e ) {}
-                finally
-                {
-                  if ( bw != null  ) try { bw.close(); } catch( Exception ee ) {}
-                }
-	}
+    public static void writeBaseDir(Context ctx, String baseDir) {
+        BufferedWriter bw = null;
+        try {
+            OutputStream configOutput = ctx.openFileOutput("config.dat", Context.MODE_PRIVATE);
+            bw = new BufferedWriter(new OutputStreamWriter(configOutput));
+            bw.write(baseDir);
+            bw.write('\n');
+        } catch (Exception e) {
+        } finally {
+            if (bw != null) try {
+                bw.close();
+            } catch (Exception ee) {
+            }
+        }
+    }
 }
